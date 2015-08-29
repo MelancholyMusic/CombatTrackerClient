@@ -1,0 +1,17 @@
+﻿<Application
+    x:Class="CombatTrackerClient.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CombatTrackerClient"
+    RequestedTheme="Dark">
+    <Application.Resources>
+        <Thickness x:Key="ButtonBorderThemeThickness">0</Thickness>
+		
+        <SolidColorBrush x:Key="HoverButton" Color="#FF2E2E2E" />
+        <SolidColorBrush x:Key="ClickButton" Color="#FF454545" />
+        <SolidColorBrush x:Key="SelectedButton" Color="#FF1E4160" />
+        <SolidColorBrush x:Key="IdleButtonLeft" Color="#FF171717" />
+        <SolidColorBrush x:Key="IdleButtonRight" Color="#FF1F1F1F" />
+    </Application.Resources>
+</Application>
+
