@@ -12,19 +12,31 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using System.Threading.Tasks;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace CombatTrackerClient
 {
-	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
-	/// </summary>
 	public sealed partial class PartyPage : Page
 	{
 		public PartyPage()
 		{
 			this.InitializeComponent();
+		}
+
+		private void Page_Loaded(object sender, RoutedEventArgs e)
+		{
+			LoadParties();
+		}
+
+		private async void LoadParties()
+		{
+			HttpClient client = new HttpClient();
+			string parties = await client.GetStringAsync("http://combattracker.azurewebsites.net/api/Parties/");
+			List<Party> partyList = JsonConvert.DeserializeObject<List<Party>>(parties);
+
+			Text.Text = parties + " xxxxxxxxxxxxxxxxx " + partyList.Count + partyList.ElementAt(1).Name;
 		}
 	}
 }

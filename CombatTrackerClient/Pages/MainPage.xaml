@@ -29,8 +29,8 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <local:NavigationButton x:Name="Party" Grid.Row="0" PointerReleased="Pointer_Released" PointerPressed="Navigation_Pressed"/>
-                <local:NavigationButton x:Name="Character" Grid.Row="1" PointerReleased="Pointer_Released" PointerPressed="Navigation_Pressed"/>
+                <local:NavigationButton x:Name="Character" Grid.Row="0" PointerReleased="Pointer_Released" PointerPressed="Navigation_Pressed"/>
+                <local:NavigationButton x:Name="Party" Grid.Row="1" PointerReleased="Pointer_Released" PointerPressed="Navigation_Pressed"/>
                 <local:NavigationButton x:Name="Combat" Grid.Row="2" PointerReleased="Pointer_Released" PointerPressed="Navigation_Pressed"/>
                 <local:NavigationButton x:Name="SignIn" Grid.Row="4" PointerReleased="Pointer_Released" PointerPressed="Navigation_Pressed"/>
                 <local:NavigationButton x:Name="Settings" Grid.Row="5" PointerReleased="Pointer_Released" PointerPressed="Navigation_Pressed"/>

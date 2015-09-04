@@ -1,1 +1,0 @@
-C:\Users\Michael\SkyDrive\Programming\RP\CombatTracker\CombatTrackerClient\CombatTrackerClient.csproj;x86

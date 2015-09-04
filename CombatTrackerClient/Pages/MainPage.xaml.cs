@@ -32,8 +32,8 @@ namespace CombatTrackerClient
 			titleBar.ButtonHoverForegroundColor = Colors.White;
 
 			InitializeComponent();
-			Party.SetPageType(PageType.PARTY);
 			Character.SetPageType(PageType.CHARACTER);
+			Party.SetPageType(PageType.PARTY);
 			Combat.SetPageType(PageType.COMBAT);
 			SignIn.SetPageType(PageType.SIGN_IN);
 			Settings.SetPageType(PageType.SETTINGS);
