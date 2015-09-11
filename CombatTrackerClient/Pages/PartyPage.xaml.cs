@@ -38,11 +38,11 @@ namespace CombatTrackerClient
 			string parties = await client.GetStringAsync("http://combattracker.azurewebsites.net/api/Parties/");
 			List<Party> partyList = JsonConvert.DeserializeObject<List<Party>>(parties);
 
-            StackParties.Children.Clear();
+            ListParties.Items.Clear();
 
             foreach (Party party in partyList)
             {
-                StackParties.Children.Add(new PartyListItem(party));
+                ListParties.Items.Add(new PartyListItem(party));
             }
 
             //Text.Text = parties + " xxxxxxxxxxxxxxxxx " + partyList.Count + partyList.ElementAt(1).Name;

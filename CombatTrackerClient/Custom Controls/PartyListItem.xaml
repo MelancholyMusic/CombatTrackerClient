@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid x:Name="NavigationGrid" Background="#FF1F1F1F" BorderThickness="0,0,0,1" Padding="0" PointerEntered="NavigationGrid_PointerEntered" PointerExited="NavigationGrid_PointerExited" Tapped="NavigationGrid_Tapped">
+    <Grid x:Name="NavigationGrid" BorderThickness="0,0,0,1" Padding="0" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>

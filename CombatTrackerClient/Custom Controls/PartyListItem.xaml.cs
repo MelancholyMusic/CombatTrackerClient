@@ -21,7 +21,6 @@ namespace CombatTrackerClient.Custom_Controls
     public sealed partial class PartyListItem : UserControl
     {
         public Party party; //maybe unneccessary?
-        public bool IsActive { get; private set; }
 
         public PartyListItem(Party p)
         {
@@ -37,31 +36,6 @@ namespace CombatTrackerClient.Custom_Controls
             {
                 Symbol.Visibility = Visibility.Collapsed;
             }
-        }
-
-        private void NavigationGrid_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            if (!IsActive && !MainPage.IsClicking)
-                NavigationGrid.Background = App.Colors.BUTTON_HOVER;
-            else if (MainPage.IsClicking && MainPage.BeingClicked == this)
-                NavigationGrid.Background = App.Colors.BUTTON_CLICK;
-        }
-
-        private void NavigationGrid_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            if (!IsActive)
-                NavigationGrid.Background = App.Colors.BUTTON_IDLE_LEFT;
-        }
-
-        public void MakeActive(bool isActive)
-        {
-            NavigationGrid.Background = isActive ? App.Colors.BUTTON_SELECTED : App.Colors.BUTTON_IDLE_LEFT;
-            IsActive = isActive;
-        }
-
-        private void NavigationGrid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            MakeActive(true);
         }
     }
 }
