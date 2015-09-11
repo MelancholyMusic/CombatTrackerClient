@@ -44,9 +44,7 @@
                 <TextBlock Grid.Column="2" Text="Players"/>
                 <TextBlock Grid.Column="3" Text="Private"/>
             </Grid>
-            <Grid Grid.Row="1">
-				
-			</Grid>
-		</Grid>
+            <StackPanel x:Name="StackParties" Orientation="Vertical" Grid.Row="1" Tapped="StackParties_Tapped"/>
+        </Grid>
     </Grid>
 </Page>
