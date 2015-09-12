@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using CombatTrackerServer.Models;
+using CombatTrackerClient.Custom_Controls;
 
 namespace CombatTrackerClient
 {
@@ -36,7 +38,14 @@ namespace CombatTrackerClient
 			string parties = await client.GetStringAsync("http://combattracker.azurewebsites.net/api/Parties/");
 			List<Party> partyList = JsonConvert.DeserializeObject<List<Party>>(parties);
 
-			Text.Text = parties + " xxxxxxxxxxxxxxxxx " + partyList.Count + partyList.ElementAt(1).Name;
+            ListParties.Items.Clear();
+
+            foreach (Party party in partyList)
+            {
+                ListParties.Items.Add(new PartyListItem(party));
+            }
+
+            //Text.Text = parties + " xxxxxxxxxxxxxxxxx " + partyList.Count + partyList.ElementAt(1).Name;
 		}
-	}
+    }
 }

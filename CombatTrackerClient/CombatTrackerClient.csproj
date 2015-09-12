@@ -102,6 +102,9 @@
     <Compile Include="Custom Controls\InitiativeGrid.xaml.cs">
       <DependentUpon>InitiativeGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Custom Controls\PartyListItem.xaml.cs">
+      <DependentUpon>PartyListItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CombatPage.xaml.cs">
       <DependentUpon>CombatPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Custom Controls\InitiativeGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\PartyListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
