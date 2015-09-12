@@ -14,28 +14,26 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace CombatTrackerClient.Custom_Controls
 {
-    public sealed partial class PartyListItem : UserControl
-    {
-        public Party party; //maybe unneccessary?
+	public sealed partial class PartyListItem : UserControl
+	{
+		public int id;
 
-        public PartyListItem(Party p)
-        {
-            this.InitializeComponent();
+		public PartyListItem(Party p)
+		{
+			this.InitializeComponent();
 
-            party = p;
+			id = p.Id;
 
-            TextID.Text = party.Id.ToString();
-            TextName.Text = party.Name;
-            TextPlayers.Text = "0/4"; //party.Players + "/" + party.MaxPlayers;
+			TextID.Text = p.Id.ToString();
+			TextName.Text = p.Name;
+			TextPlayers.Text = p.JoinedPlayers + "/" + p.MaxPlayers;
 
-            if (false)//(!party.Private)
-            {
-                Symbol.Visibility = Visibility.Collapsed;
-            }
-        }
-    }
+			if(p.Locked)
+			{
+				Symbol.Visibility = Visibility.Collapsed;
+			}
+		}
+	}
 }

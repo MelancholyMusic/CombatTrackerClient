@@ -23,7 +23,7 @@
         <TextBlock x:Name="TextID" HorizontalAlignment="Right" Margin="0,4,16,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextName" HorizontalAlignment="Left" Margin="4,4,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Text="Name"/>
         <TextBlock x:Name="TextPlayers" HorizontalAlignment="Right" Margin="0,4,3,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Center" Grid.Column="2"/>
-        <TextBlock x:Name="Symbol" Grid.Column="3" Text="&#xE131;" FontFamily="Segoe MDL2 Assets" Foreground="#FFFFFEFE" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="17,8,17,0"/>
+        <TextBlock x:Name="Symbol" Grid.Column="3" Text="&#xE1F6;" FontFamily="Segoe MDL2 Assets" Foreground="#FFFFFEFE" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="17,8,17,0"/>
 
     </Grid>
 </UserControl>
