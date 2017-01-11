@@ -18,7 +18,7 @@ public class NetworkManager : Singleton<NetworkManager>
 		}
 	}
 
-	private const string WEB_API_ENDPOINT = "https://combattrackerserver20170105013416.azurewebsites.net/;" //"https://localhost:44354";
+	private const string WEB_API_ENDPOINT = "https://combattrackerserver20170105013416.azurewebsites.net/"; //"https://localhost:44354";
 
 	private UserAuthorization currentAuthorization;
 
