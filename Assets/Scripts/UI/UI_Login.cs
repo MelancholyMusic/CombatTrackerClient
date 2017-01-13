@@ -5,15 +5,24 @@ public class UI_Login : MonoBehaviour
 {
 	public InputField accountInput;
 	public InputField passwordInput;
+	public Button loginButton;
 
 	public void BtnPressedRegister()
 	{
-		NetworkManager.Instance.WebAPIRegister(accountInput.text, passwordInput.text);
+		UIManager.Instance.PopupRegister();
+		//NetworkManager.Instance.WebAPIRegister(accountInput.text, passwordInput.text);
 	}
 
-	public void BtnPressedLogin(Button button)
+	public void BtnPressedLogin()
 	{
-		button.enabled = false;
+		accountInput.interactable = false;
+		passwordInput.interactable = false;
+		loginButton.interactable = false;
 		NetworkManager.Instance.WebAPILogin(accountInput.text, passwordInput.text);
+	}
+
+	public void OnTextChanged()
+	{
+		loginButton.interactable = accountInput.text.Length > 0 && passwordInput.text.Length > 0;
 	}
 }
