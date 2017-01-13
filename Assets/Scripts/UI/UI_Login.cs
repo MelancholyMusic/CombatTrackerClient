@@ -3,21 +3,17 @@ using UnityEngine.UI;
 
 public class UI_Login : MonoBehaviour
 {
-	public InputField emailInput;
+	public InputField accountInput;
 	public InputField passwordInput;
 
 	public void BtnPressedRegister()
 	{
-		NetworkManager.Instance.WebAPIRegister(emailInput.text, passwordInput.text);
+		NetworkManager.Instance.WebAPIRegister(accountInput.text, passwordInput.text);
 	}
 
-	public void BtnPressedLogin()
+	public void BtnPressedLogin(Button button)
 	{
-		NetworkManager.Instance.WebAPILogin(emailInput.text, passwordInput.text);
-	}
-
-	public void BtnPressedAttemptAuthorized()
-	{
-		NetworkManager.Instance.AuthorizationCheck();
+		button.enabled = false;
+		NetworkManager.Instance.WebAPILogin(accountInput.text, passwordInput.text);
 	}
 }

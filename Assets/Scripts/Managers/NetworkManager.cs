@@ -18,9 +18,9 @@ public class NetworkManager : Singleton<NetworkManager>
 		}
 	}
 
-	private const string WEB_API_ENDPOINT = "https://combattrackerserver20170105013416.azurewebsites.net/"; //"https://localhost:44354";
+	private const string WEB_API_ENDPOINT = "https://localhost:44354";//"https://combattrackerserver20170105013416.azurewebsites.net/"; //;
 
-	private UserAuthorization currentAuthorization;
+	private UserAuthorization currentAuthorization = new UserAuthorization();
 
 	protected NetworkManager()
 	{
@@ -83,29 +83,6 @@ public class NetworkManager : Singleton<NetworkManager>
 		{
 			Debug.Log("Login Success: " + result);
 			currentAuthorization = JsonUtility.FromJson<UserAuthorization>(result);
-		}
-	}
-
-	public void AuthorizationCheck()
-	{
-		StartCoroutine(DoAuthorizationCheck());
-	}
-
-	private IEnumerator DoAuthorizationCheck()
-	{
-		Debug.Log("Attempting to reach authorized-only endpoint...");
-
-		UnityWebRequest authorizedRequest = UnityWebRequest.Get(WEB_API_ENDPOINT + "/api/authtest");
-		authorizedRequest.SetRequestHeader("Authorization", currentAuthorization.token_type + " " + currentAuthorization.access_token);
-		yield return authorizedRequest.Send();
-
-		if(authorizedRequest.responseCode != 200)
-		{
-			Debug.LogError("Authenticated ERROR: " + authorizedRequest.responseCode);
-		}
-		else
-		{
-			Debug.Log("Authenticated Success: " + authorizedRequest.downloadHandler.text);
 		}
 	}
 }
