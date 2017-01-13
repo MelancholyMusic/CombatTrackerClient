@@ -73,7 +73,7 @@ namespace UnityEngine.UI.Extensions
             float _dimension = 0;
             Rect panelDimensions = gameObject.GetComponent<RectTransform>().rect;
             float currentXPosition = 0;
-            var pageStepValue = _childSize = (int)panelDimensions.width * ((PageStep == 0) ? 3 : PageStep);
+            var pageStepValue = _childSize = (int)panelDimensions.width * ((PageStep == 0) ? 3 : PageStep) + 500;
 
 
             for (int i = 0; i < _screensContainer.transform.childCount; i++)
