@@ -9,7 +9,7 @@ public class UI_Login : MonoBehaviour
 
 	public void BtnPressedRegister()
 	{
-		UIManager.Instance.PopupRegister();
+		UIManager.Instance.QueuePopup(Popup.Register);
 		//NetworkManager.Instance.WebAPIRegister(accountInput.text, passwordInput.text);
 	}
 
