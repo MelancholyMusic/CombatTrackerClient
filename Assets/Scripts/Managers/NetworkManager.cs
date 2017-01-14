@@ -5,6 +5,12 @@ using UnityEngine.Networking;
 
 public class NetworkManager : Singleton<NetworkManager>
 {
+	public enum ServerTier
+	{
+		LOCAL,
+		DEV
+	}
+
 	[Serializable]
 	private class UserAuthorization
 	{
@@ -18,41 +24,48 @@ public class NetworkManager : Singleton<NetworkManager>
 		}
 	}
 
-	private const string WEB_API_ENDPOINT = "https://localhost:44354";//"https://combattrackerserver20170105013416.azurewebsites.net/"; //;
+	public ServerTier serverTier;
 
 	private UserAuthorization currentAuthorization = new UserAuthorization();
+
+	string WebApiEndpoint
+	{
+		get
+		{
+			switch(serverTier)
+			{
+				case ServerTier.LOCAL:
+					return "https://localhost:44354";
+				case ServerTier.DEV:
+				default:
+					return "https://combattrackerserver20170105013416.azurewebsites.net/";
+			}
+		}
+	}
 
 	protected NetworkManager()
 	{
 	}
 
-	public void WebAPIRegister(string email, string password)
+	public void WebAPIRegister(string email, string password, string reenterPassword)
 	{
-		StartCoroutine(DoWebAPIRegister(email, password));
+		StartCoroutine(DoWebAPIRegister(email, password, reenterPassword));
 	}
 
-	private IEnumerator DoWebAPIRegister(string email, string password)
+	private IEnumerator DoWebAPIRegister(string email, string password, string reenterPassword)
 	{
 		Debug.Log("Attempting to register new user...");
 
 		WWWForm loginParams = new WWWForm();
 		loginParams.AddField("email", email);
 		loginParams.AddField("password", password);
-		loginParams.AddField("confirmPassword", password);
+		loginParams.AddField("confirmPassword", reenterPassword);
 
-		UnityWebRequest loginRequest = UnityWebRequest.Post(WEB_API_ENDPOINT + "/api/register", loginParams);
+		UnityWebRequest loginRequest = UnityWebRequest.Post(WebApiEndpoint + "/api/register", loginParams);
 		loginRequest.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		yield return loginRequest.Send();
 
-		string result = loginRequest.downloadHandler.text;
-		if(loginRequest.responseCode != 200)
-		{
-			Debug.LogError("Register ERROR: " + result);
-		}
-		else
-		{
-			Debug.Log("Register Success: " + result);
-		}
+		MessageDispatcher.SendDictionaryMessage(MessageEventId.OnRegister, MessageParamId.Success, loginRequest.responseCode == 200, MessageParamId.ErrorCode, loginRequest.downloadHandler.text);
 	}
 
 	public void WebAPILogin(string email, string password)
@@ -70,7 +83,7 @@ public class NetworkManager : Singleton<NetworkManager>
 		loginParams.AddField("password", password);
 		loginParams.AddField("scope", "openid+email+name+profile+roles");
 
-		UnityWebRequest loginRequest = UnityWebRequest.Post(WEB_API_ENDPOINT + "/connect/token", loginParams);
+		UnityWebRequest loginRequest = UnityWebRequest.Post(WebApiEndpoint + "/connect/token", loginParams);
 		loginRequest.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		yield return loginRequest.Send();
 
