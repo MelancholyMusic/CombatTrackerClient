@@ -53,6 +53,7 @@ namespace UnityEngine.UI.Extensions
             ParticleSystemRenderer renderer = GetComponent<ParticleSystemRenderer>();
             bool setParticleSystemMaterial = false;
 
+			var main = _particleSystem.main;
             if (_particleSystem == null)
             {
                 _particleSystem = GetComponent<ParticleSystem>();
@@ -73,8 +74,8 @@ namespace UnityEngine.UI.Extensions
                     particleTexture = currentMaterial.mainTexture;
                 }
 
-                // automatically set scaling
-                _particleSystem.scalingMode = ParticleSystemScalingMode.Local;
+				// automatically set scaling
+				main.scalingMode = ParticleSystemScalingMode.Local;
 
                 _particles = null;
                 setParticleSystemMaterial = true;
@@ -113,7 +114,7 @@ namespace UnityEngine.UI.Extensions
             // prepare particles array
             if (_particles == null)
             {
-                _particles = new ParticleSystem.Particle[_particleSystem.maxParticles];
+                _particles = new ParticleSystem.Particle[main.maxParticles];
             }
 
             // prepare uvs
@@ -176,15 +177,16 @@ namespace UnityEngine.UI.Extensions
             {
                 ParticleSystem.Particle particle = _particles[i];
 
-                // get particle properties
-                Vector2 position = (_particleSystem.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
+				// get particle properties
+				var main = _particleSystem.main;
+                Vector2 position = (main.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
                 float rotation = -particle.rotation * Mathf.Deg2Rad;
                 float rotation90 = rotation + Mathf.PI / 2;
                 Color32 color = particle.GetCurrentColor(_particleSystem);
                 float size = particle.GetCurrentSize(_particleSystem) * 0.5f;
 
                 // apply scale
-                if (_particleSystem.scalingMode == ParticleSystemScalingMode.Shape)
+                if (main.scalingMode == ParticleSystemScalingMode.Shape)
                 {
                     position /= canvas.scaleFactor;
                 }

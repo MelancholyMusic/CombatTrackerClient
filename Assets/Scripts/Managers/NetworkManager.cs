@@ -43,10 +43,6 @@ public class NetworkManager : Singleton<NetworkManager>
 		}
 	}
 
-	protected NetworkManager()
-	{
-	}
-
 	public void WebAPIRegister(string email, string password, string reenterPassword)
 	{
 		StartCoroutine(DoWebAPIRegister(email, password, reenterPassword));
@@ -54,8 +50,6 @@ public class NetworkManager : Singleton<NetworkManager>
 
 	private IEnumerator DoWebAPIRegister(string email, string password, string reenterPassword)
 	{
-		Debug.Log("Attempting to register new user...");
-
 		WWWForm loginParams = new WWWForm();
 		loginParams.AddField("email", email);
 		loginParams.AddField("password", password);
@@ -75,8 +69,6 @@ public class NetworkManager : Singleton<NetworkManager>
 
 	private IEnumerator DoWebAPILogin(string email, string password)
 	{
-		Debug.Log("Attempting to login...");
-
 		WWWForm loginParams = new WWWForm();
 		loginParams.AddField("grant_type", "password");
 		loginParams.AddField("username", email);
@@ -97,5 +89,17 @@ public class NetworkManager : Singleton<NetworkManager>
 			Debug.Log("Login Success: " + result);
 			currentAuthorization = JsonUtility.FromJson<UserAuthorization>(result);
 		}
+	}
+
+	public void WebAPIRetrievePlayerData()
+	{
+		StartCoroutine(DoWebAPIRetrievePlayerData());
+	}
+
+	private IEnumerator DoWebAPIRetrievePlayerData()
+	{
+		UnityWebRequest loginRequest = UnityWebRequest.Get(WebApiEndpoint + "/");
+		loginRequest.SetRequestHeader("Authorization", currentAuthorization.token_type + " " + currentAuthorization.access_token);
+		yield return loginRequest.Send();
 	}
 }

@@ -38,7 +38,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ca5b8925630b041879d536bc2c6e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverTier: 1
+  serverTier: 0
 --- !u!224 &224723480049882646
 RectTransform:
   m_ObjectHideFlags: 1
