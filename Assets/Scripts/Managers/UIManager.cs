@@ -2,7 +2,7 @@
 
 public class Popup
 {
-	public static string Register = "UI/UI_Popup_Register";
+	public static string Register = "UI/Popups/UI_Popup_Register";
 }
 
 public class UIManager : Singleton<UIManager>
