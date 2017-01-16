@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Login : MonoBehaviour
@@ -8,6 +9,27 @@ public class UI_Login : MonoBehaviour
 	public InputField passwordInput;
 	public Button loginButton;
 	public Button registerButton;
+	public Toggle rememberMeToggle;
+
+	private void Start()
+	{
+		accountInput.text = PlayerPrefs.GetString("accountName");
+		if(accountInput.text.Length > 0)
+		{
+			EventSystem.current.SetSelectedGameObject(passwordInput.gameObject);
+			rememberMeToggle.isOn = true;
+		}
+	}
+
+	private void OnDestroy()
+	{
+		if(rememberMeToggle.isOn)
+			PlayerPrefs.SetString("accountName", accountInput.text);
+		else
+			PlayerPrefs.DeleteKey("accountName");
+
+		PlayerPrefs.Save();
+	}
 
 	public void BtnPressedRegister()
 	{
