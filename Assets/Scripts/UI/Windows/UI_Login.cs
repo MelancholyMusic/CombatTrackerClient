@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Login : MonoBehaviour
@@ -59,8 +60,16 @@ public class UI_Login : MonoBehaviour
 		MessageDispatcher.RemoveListener(MessageEventId.OnLogin, OnLoginComplete);
 
 		UIManager.Instance.Waiting(false);
-		EnableButtons(true);
-		loginButton.interactable = false;
+
+		if((bool)paramDict[MessageParamId.Success])
+		{
+			LoadingManager.Instance.LoadScene(CTScene.CHARACTER_SELECT);
+		}
+		else
+		{
+			EnableButtons(true);
+			loginButton.interactable = false;
+		}
 	}
 
 	public void OnTextChanged()
