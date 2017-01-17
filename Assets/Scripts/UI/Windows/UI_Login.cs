@@ -41,6 +41,8 @@ public class UI_Login : MonoBehaviour
 		MessageDispatcher.AddListener(MessageEventId.OnLogin, OnLoginComplete);
 
 		EnableButtons(false);
+		UIManager.Instance.Waiting(true);
+
 		NetworkManager.Instance.WebAPILogin(accountInput.text, passwordInput.text);
 	}
 
@@ -56,6 +58,7 @@ public class UI_Login : MonoBehaviour
 	{
 		MessageDispatcher.RemoveListener(MessageEventId.OnLogin, OnLoginComplete);
 
+		UIManager.Instance.Waiting(false);
 		EnableButtons(true);
 		loginButton.interactable = false;
 	}

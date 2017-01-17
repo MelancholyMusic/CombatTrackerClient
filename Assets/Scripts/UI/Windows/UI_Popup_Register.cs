@@ -33,6 +33,8 @@ public class UI_Popup_Register : UI_Popup
 	
 		EnableFields(false);
 		signUpButton.interactable = false;
+		UIManager.Instance.Waiting(true);
+
 		NetworkManager.Instance.WebAPIRegister(emailInput.text, passwordInput.text, reenterPasswordInput.text);
 	}
 
@@ -84,5 +86,7 @@ public class UI_Popup_Register : UI_Popup
 					break;
 			}
 		}
+
+		UIManager.Instance.Waiting(false);
 	}
 }

@@ -7,9 +7,16 @@ public class Popup
 
 public class UIManager : Singleton<UIManager>
 {
+	[SerializeField]
+	private GameObject waiting;
 
 	public void QueuePopup(string popup)
 	{
 		Instantiate(Resources.Load(popup));
+	}
+
+	public void Waiting(bool isOn)
+	{
+		waiting.SetActive(isOn);
 	}
 }
