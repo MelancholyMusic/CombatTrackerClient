@@ -9,6 +9,8 @@ public class UIManager : Singleton<UIManager>
 {
 	[SerializeField]
 	private GameObject waiting;
+	[SerializeField]
+	private GameObject loading;
 
 	public void QueuePopup(string popup)
 	{
@@ -18,5 +20,10 @@ public class UIManager : Singleton<UIManager>
 	public void Waiting(bool isOn)
 	{
 		waiting.SetActive(isOn);
+	}
+
+	public void Loading(bool isOn)
+	{
+		loading.SetActive(isOn);
 	}
 }
