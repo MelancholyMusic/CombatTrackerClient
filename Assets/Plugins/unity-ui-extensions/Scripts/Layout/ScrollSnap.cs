@@ -458,6 +458,14 @@ namespace UnityEngine.UI.Extensions
             }
         }
 
+        public void ChangePage(RectTransform child)
+        {
+            if (child.transform.IsChildOf(scrollRect.transform))
+            {
+                ChangePage(child.GetSiblingIndex());
+            }
+        }
+
         //changes the bullets on the bottom of the page - pagination
         private void PageChanged(int currentPage)
         {
