@@ -9,11 +9,12 @@ namespace UnityEngine.UI.Extensions
     public class CylinderText : BaseMeshEffect
     {
         public float radius;
-        private RectTransform rectTrans;
-
+#pragma warning disable
+		private RectTransform rectTrans;
+#pragma warning restore
 
 #if UNITY_EDITOR
-        protected override void OnValidate()
+		protected override void OnValidate()
         {
             base.OnValidate();
             if (rectTrans == null)

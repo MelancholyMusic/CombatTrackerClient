@@ -28,7 +28,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
 	private UserAuthorization currentAuthorization = new UserAuthorization();
 
-	string WebApiEndpoint
+	private string WebApiEndpoint
 	{
 		get
 		{
@@ -50,16 +50,16 @@ public class NetworkManager : Singleton<NetworkManager>
 
 	private IEnumerator DoWebAPIRegister(string email, string password, string reenterPassword)
 	{
-		WWWForm loginParams = new WWWForm();
-		loginParams.AddField("email", email);
-		loginParams.AddField("password", password);
-		loginParams.AddField("confirmPassword", reenterPassword);
+		WWWForm registerParams = new WWWForm();
+		registerParams.AddField("email", email);
+		registerParams.AddField("password", password);
+		registerParams.AddField("confirmPassword", reenterPassword);
 
-		UnityWebRequest loginRequest = UnityWebRequest.Post(WebApiEndpoint + "/api/register", loginParams);
-		loginRequest.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		yield return loginRequest.Send();
+		UnityWebRequest registerRequest = UnityWebRequest.Post(WebApiEndpoint + "/api/register", registerParams);
+		registerRequest.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		yield return registerRequest.Send();
 
-		MessageDispatcher.SendDictionaryMessage(MessageEventId.OnRegister, MessageParamId.Success, loginRequest.responseCode == 200, MessageParamId.ErrorCode, loginRequest.downloadHandler.text);
+		MessageDispatcher.SendDictionaryMessage(MessageEventId.OnRegister, MessageParamId.Success, registerRequest.responseCode == 200, MessageParamId.ErrorCode, registerRequest.downloadHandler.text);
 	}
 
 	public void WebAPILogin(string email, string password)
@@ -79,16 +79,7 @@ public class NetworkManager : Singleton<NetworkManager>
 		loginRequest.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		yield return loginRequest.Send();
 
-		string result = loginRequest.downloadHandler.text;
-		if(loginRequest.responseCode != 200)
-		{
-			Debug.LogError("Login ERROR: " + result);
-		}
-		else
-		{
-			Debug.Log("Login Success: " + result);
-			currentAuthorization = JsonUtility.FromJson<UserAuthorization>(result);
-		}
+		MessageDispatcher.SendDictionaryMessage(MessageEventId.OnLogin, MessageParamId.Success, loginRequest.responseCode == 200, MessageParamId.ErrorCode, loginRequest.downloadHandler.text);
 	}
 
 	public void WebAPIRetrievePlayerData()
