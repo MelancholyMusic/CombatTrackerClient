@@ -121,14 +121,19 @@ public class UICharacterVitalsManager : MonoBehaviour {
     }
 
     private string HitPointText()
-    {
-        
+    {        
         HPFillMask.sizeDelta = new Vector2(HPFillMask.sizeDelta.x, Math.Max(150 * character.HP_Current / character.HP_Max, 0.1f));
 
         if (character.HP_Current <= 0)
         {
+            //HitPoints.rectTransform.localScale.Set(0,0,0);
+            //NegPoints.rectTransform.localScale.Set(1, 1, 1);
 
+            NegPoints.text = character.HP_Current.ToString();
+            return "";
         }
+        else
+            NegPoints.text = "";
 
         return character.HP_Current + "/" + character.HP_Max;
     }
