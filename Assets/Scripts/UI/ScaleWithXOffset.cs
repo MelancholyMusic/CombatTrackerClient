@@ -19,19 +19,21 @@ public class ScaleWithXOffset : MonoBehaviour
 	void Awake()
 	{
         glowImage = glow.GetComponent<UnityEngine.UI.Image>();
-        SetGlow(0);
 
-        screenWidth = screen.rect.width / 2 - 50;
+        //Can't get this working 100% right
+        screenWidth = screen.rect.width / 2 + cardRect.rect.width;
 		prevX = cardRect.position.x - 1;
-		scale = maxScale;
+        scale = GetScale();
 		cardRect.localScale = new Vector3(scale, scale);
+
+        Update();
 	}
 
 	void Update()
 	{
         if(prevX != cardRect.position.x)
 		{
-			scale = (maxScale - minScale) + minScale * Mathf.Clamp(1 - Mathf.Abs((prevX - screenWidth / 2) / (screenWidth / 2)), minScale, maxScale);
+            scale = GetScale();
 			cardRect.localScale = new Vector3(scale, scale);
 			prevX = cardRect.position.x;            
 		}
@@ -61,5 +63,10 @@ public class ScaleWithXOffset : MonoBehaviour
         else
             glowImage.color = new Color(glowImage.color.r, glowImage.color.g, glowImage.color.b, Mathf.Clamp(glowImage.color.a + alpha, 0, 1));
 
+    }
+
+    private float GetScale()
+    {
+        return (maxScale - minScale) + minScale * Mathf.Clamp(1 - Mathf.Abs((prevX - screenWidth / 2) / (screenWidth / 2)), minScale, maxScale);
     }
 }
