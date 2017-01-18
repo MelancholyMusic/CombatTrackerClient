@@ -11,6 +11,7 @@ public class UI_CharacterVitals : MonoBehaviour
 
 	public Image Portrait;
 	public RectTransform HPFillMask;
+    public RectTransform XPFillMask;
 	public Text HitPoints;
 	public Text NegPoints;
 	public Text AC;
@@ -41,9 +42,15 @@ public class UI_CharacterVitals : MonoBehaviour
 
 		CreateResistanceList();
 		CreateStatusList();
+        ExpFill();
 	}
 
-	private Image PortraitImage()
+    private void ExpFill()
+    {
+        XPFillMask.sizeDelta = new Vector2(Math.Max(150 * (character.XP_Current - character.XP_prev) / (character.XP_next - character.XP_prev), 0.1f), XPFillMask.sizeDelta.y);
+    }
+
+    private Image PortraitImage()
 	{
 		return character.Portrait;
 	}
